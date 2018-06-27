@@ -20,14 +20,14 @@ var fs = require('fs');
 fs.readFile('Non existent file', function(err, data){
 	if(err)
 	{
-		console.log('System generated error- asynchronous API:'+err.stack);// stack property prints the stack trace of the error
+		console.log('System generated error- asynchronous API:'+err.stack+'type of error is '+err.code);// stack property prints the stack trace of the error
 	}
 	else{
 		console.log('This will not be executed as error will occur');
 	}
 });
 
-fs.readFile('Non existent file', function(err, data){ // Error thrown inside function will cause the nodejs process to crash unless 
+fs.readFile('Non existent file', function(err, data){ // Error thrown inside callback function(using throw/generated due to violations in code such as ReferenceError) will cause the nodejs process to crash unless 
 	if(err) 										  // handler for 'uncaughtException' event of process is present
 	{
 		throw err; // will cause the nodejs process to fail unless handler present.
