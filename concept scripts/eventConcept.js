@@ -1,5 +1,5 @@
 const EventEmitter =  require('events');
-
+//Listener function should be registered before the event is triggered else there will be no listener function to handle the event.
 const myEvent = new EventEmitter();
 
 myEvent.on('start', function firstFunc (){
@@ -10,9 +10,7 @@ myEvent.on('start', function secFunc () {
 	console.log('Hello');
 	});
 
-myEvent.on('start', function thirdFunc (){
-	console.log('World');
-	});
+myEvent.on('start', thirdFunc);
 	
 myEvent.on('start', (a, b) =>{
 	console.log(a + ' ' + b);
@@ -22,3 +20,7 @@ myEvent.on('start', (a, b) =>{
 myEvent.emit('start', 'arg1', 'arg2'); //all the listening functions will be called
 
 console.log('This should print after the events have been triggered');
+
+function thirdFunc (){
+	console.log('World');
+	}
